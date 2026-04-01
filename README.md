@@ -3,7 +3,7 @@
 This is my MERN stack submission for the assignment. It's a full-stack web application designed for scheduling lectures, managing courses, and preventing overlapping schedules for instructors.
 
 Live Project Link: https://online-lecture-scheduling-module-t3z3.onrender.com
-Video Walkthrough: [INSERT_GOOGLE_DRIVE_VIDEO_LINK_HERE]
+Video Walkthrough: https://drive.google.com/file/d/1guVlzhVRAXyGzBV01WtfeL-X7tv2llsa/view?usp=sharing
 
 ---
 
