@@ -67,16 +67,7 @@ export default function InstructorPanel({ instructorId, userName }) {
                 gap: '1.25rem',
                 border: '1px solid rgba(255,255,255,0.05)'
               }}>
-                <div style={{ 
-                  background: 'linear-gradient(135deg, var(--primary), var(--accent))', 
-                  color: 'white', 
-                  padding: '0.8rem', 
-                  borderRadius: '14px', 
-                  fontWeight: '800', 
-                  textAlign: 'center', 
-                  minWidth: '65px',
-                  boxShadow: '0 8px 20px rgba(138, 92, 248, 0.3)'
-                }}>
+                <div style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))', color: 'white', padding: '0.8rem', borderRadius: '14px', fontWeight: '800', textAlign: 'center', minWidth: '65px', boxShadow: '0 8px 20px rgba(138, 92, 248, 0.3)' }}>
                   <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', opacity: 0.9 }}>{new Date(lecture.date).toLocaleString('default', { month: 'short' })}</div>
                   <div style={{ fontSize: '1.4rem' }}>{new Date(lecture.date).getDate()}</div>
                 </div>
