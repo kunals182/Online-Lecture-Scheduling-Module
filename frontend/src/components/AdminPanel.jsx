@@ -73,12 +73,12 @@ export default function AdminPanel() {
     e.preventDefault();
     setInstructorError('');
     try {
-      await api.post('/users', { name: instructorForm.name, email: instructorForm.email, password: instructorForm.password, role: 'INSTRUCTOR' });
+      await api.post('/users', { name: instructorForm.name });
       setShowInstructorModal(false);
-      setInstructorForm({ name: '', email: '', password: '' });
+      setInstructorForm({ name: '' });
       fetchData();
     } catch (err) {
-      setInstructorError(err.response?.data?.message || 'Error creating instructor. Make sure email is unique.');
+      setInstructorError(err.response?.data?.message || 'Error creating instructor.');
     }
   };
 
