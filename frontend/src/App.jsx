@@ -11,6 +11,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+
   const submitLoginForm = async (e) => {
     e.preventDefault();
     setError('');
@@ -27,7 +28,7 @@ function App() {
     localStorage.removeItem('user');
     setUser(null);
   };
-
+  
   if (!user) {
     return (
       <div className="login-page" style={{
@@ -114,8 +115,6 @@ function App() {
               Identify & Sign In <FaSignInAlt />
             </button>
           </form>
-
-
         </div>
       </div>
     );
