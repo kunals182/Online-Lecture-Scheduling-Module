@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import api from '../api';
 import { FaCalendarCheck, FaBook } from 'react-icons/fa';
 
-export default function InstructorPanel({ instructorId }) {
+export default function InstructorPanel({ instructorId, userName }) {
   const [lectures, setLectures] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +31,7 @@ export default function InstructorPanel({ instructorId }) {
         <h2 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <FaCalendarCheck color="var(--primary)" /> Academic Schedule
         </h2>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Welcome back, {lectures[0]?.instructorId?.name || 'Instructor'}. Here are your upcoming sessions.</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Welcome back, {userName || 'Instructor'}. Here are your upcoming sessions.</p>
       </div>
 
       {lectures.length === 0 ? (

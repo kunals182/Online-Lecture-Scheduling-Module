@@ -30,10 +30,10 @@ function App() {
 
   if (!user) {
     return (
-      <div className="login-page" style={{ 
-        height: '100vh', 
-        display: 'flex', 
-        justifyContent: 'center', 
+      <div className="login-page" style={{
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden'
@@ -44,13 +44,13 @@ function App() {
 
         <div className="card animate-fade-in" style={{ width: '100%', maxWidth: '420px', padding: '3rem', position: 'relative', zIndex: 1, background: 'rgba(23, 27, 34, 0.8)' }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <div style={{ 
-              background: 'linear-gradient(135deg, var(--primary), var(--accent))', 
-              width: '64px', 
-              height: '64px', 
-              borderRadius: '18px', 
-              display: 'inline-flex', 
-              justifyContent: 'center', 
+            <div style={{
+              background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+              width: '64px',
+              height: '64px',
+              borderRadius: '18px',
+              display: 'inline-flex',
+              justifyContent: 'center',
               alignItems: 'center',
               marginBottom: '1.25rem',
               boxShadow: '0 10px 25px var(--primary-glow)',
@@ -66,14 +66,14 @@ function App() {
             <div className="form-group">
               <label className="form-label">Email Address</label>
               <div style={{ position: 'relative' }}>
-                <input 
-                  type="email" 
-                  className="form-control" 
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)} 
+                <input
+                  type="email"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@test.com"
                   style={{ paddingLeft: '3rem' }}
-                  required 
+                  required
                 />
                 <FaUser size={14} style={{ position: 'absolute', left: '1.25rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
               </div>
@@ -81,26 +81,26 @@ function App() {
             <div className="form-group">
               <label className="form-label">Password Key</label>
               <div style={{ position: 'relative' }}>
-                <input 
-                  type="password" 
-                  className="form-control" 
-                  value={password} 
-                  onChange={(e) => setPassword(e.target.value)} 
+                <input
+                  type="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   style={{ paddingLeft: '3rem' }}
-                  required 
+                  required
                 />
                 <FaLock size={14} style={{ position: 'absolute', left: '1.25rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
               </div>
             </div>
 
             {error && (
-              <div style={{ 
-                background: 'rgba(239, 68, 68, 0.1)', 
-                color: '#ef4444', 
-                padding: '0.9rem', 
-                borderRadius: '12px', 
-                marginBottom: '1.5rem', 
+              <div style={{
+                background: 'rgba(239, 68, 68, 0.1)',
+                color: '#ef4444',
+                padding: '0.9rem',
+                borderRadius: '12px',
+                marginBottom: '1.5rem',
                 fontSize: '0.85rem',
                 border: '1px solid rgba(239, 68, 68, 0.2)',
                 display: 'flex',
@@ -115,13 +115,8 @@ function App() {
               Identify & Sign In <FaSignInAlt />
             </button>
           </form>
-          
-          <div style={{ marginTop: '2.5rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1.5rem' }}>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', background: 'rgba(255,255,255,0.03)', padding: '0.75rem', borderRadius: '10px', border: '1px dashed rgba(255,255,255,0.1)' }}>
-              Evaluation Credentials: <br/> 
-              <strong style={{ color: 'var(--accent)' }}>admin@test.com / password123</strong>
-            </p>
-          </div>
+
+
         </div>
       </div>
     );
@@ -137,12 +132,12 @@ function App() {
                 <FaLock color="white" size={14} />
               </div>
               <h1 style={{ fontSize: '1.4rem', fontWeight: 800, background: 'linear-gradient(to right, #fff, var(--primary))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Scheduler<span style={{ color: 'var(--accent)', WebkitTextFillColor: 'var(--accent)' }}>.io</span>
+                Lecture Scheduler<span style={{ color: 'var(--accent)', WebkitTextFillColor: 'var(--accent)' }}>.</span>
               </h1>
             </div>
-            
+
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-              <div style={{ textAlign: 'right', display: 'none', md: 'block' } /* Simple responsive hide placeholder */}>
+              <div style={{ textAlign: 'right' }}>
                 <p style={{ fontSize: '0.9rem', fontWeight: 700 }}>{user.name}</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', justifyContent: 'flex-end' }}>
                   <div style={{ width: '6px', height: '6px', background: 'var(--success)', borderRadius: '50%', boxShadow: '0 0 8px var(--success)' }}></div>
@@ -158,7 +153,7 @@ function App() {
 
         <main style={{ flex: 1, padding: '2rem 0' }}>
           <Routes>
-            <Route path="/" element={user.role === 'ADMIN' ? <AdminPanel /> : <InstructorPanel instructorId={user._id} />} />
+            <Route path="/" element={user.role === 'ADMIN' ? <AdminPanel /> : <InstructorPanel instructorId={user._id} userName={user.name} />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </main>

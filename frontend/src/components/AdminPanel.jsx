@@ -188,7 +188,7 @@ export default function AdminPanel() {
                   borderRadius: '10px',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyroot: 'center',
+                  justifyContent: 'center',
                   boxShadow: '0 4px 12px rgba(138, 92, 248, 0.3)'
                 }}>
                   <FaUserTie size={18} />
