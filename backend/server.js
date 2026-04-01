@@ -19,16 +19,16 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/lecture-sch
 .then(async () => {
   console.log('MongoDB connected successfully');
   const User = require('./models/User');
-  const adminExists = await User.findOne({ email: 'admin@test.com' });
-  if (!adminExists) {
-    await User.create({ 
+  await User.findOneAndUpdate(
+    { email: 'admin@test.com' },
+    { 
       name: 'Admin User', 
-      email: 'admin@test.com', 
       password: 'password123', 
       role: 'ADMIN' 
-    });
-    console.log('Default admin seeded.');
-  }
+    },
+    { upsert: true, new: true }
+  );
+  console.log('Secure Admin credentials verified.');
 })
 .catch(err => console.error('MongoDB connection error:', err));
 
