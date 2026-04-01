@@ -17,7 +17,7 @@ export default function AdminPanel() {
   
   const [courseForm, setCourseForm] = useState({ name: '', level: '', description: '', image: '' });
   const [lectureForm, setLectureForm] = useState({ instructorId: '', date: '' });
-  const [instructorForm, setInstructorForm] = useState({ name: '' });
+  const [instructorForm, setInstructorForm] = useState({ name: '', email: '', password: '' });
   const [instructorError, setInstructorError] = useState('');
   
   const [errorMsg, setErrorMsg] = useState('');
@@ -73,9 +73,13 @@ export default function AdminPanel() {
     e.preventDefault();
     setInstructorError('');
     try {
-      await api.post('/users', { name: instructorForm.name });
+      await api.post('/users', { 
+        name: instructorForm.name,
+        email: instructorForm.email,
+        password: instructorForm.password
+      });
       setShowInstructorModal(false);
-      setInstructorForm({ name: '' });
+      setInstructorForm({ name: '', email: '', password: '' });
       fetchData();
     } catch (err) {
       setInstructorError(err.response?.data?.message || 'Error creating instructor.');
@@ -218,10 +222,18 @@ export default function AdminPanel() {
             {instructorError && <div style={{ background: 'var(--danger)', padding: '0.75rem', borderRadius: 'var(--radius-md)', marginBottom: '1rem', color: 'white' }}>{instructorError}</div>}
             <form onSubmit={handleAddInstructor}>
               <div className="form-group">
-                <label className="form-label">Instructor Name</label>
+                <label className="form-label">Full Name</label>
                 <input className="form-control" required placeholder="e.g. Rahul Sharma" value={instructorForm.name} onChange={e => setInstructorForm({...instructorForm, name: e.target.value})} />
               </div>
-              <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Add Instructor</button>
+              <div className="form-group">
+                <label className="form-label">Email Address</label>
+                <input type="email" className="form-control" required placeholder="rahul@example.com" value={instructorForm.email} onChange={e => setInstructorForm({...instructorForm, email: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Password</label>
+                <input type="password" className="form-control" required placeholder="••••••••" value={instructorForm.password} onChange={e => setInstructorForm({...instructorForm, password: e.target.value})} />
+              </div>
+              <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '0.5rem' }}>Create Instructor Account</button>
             </form>
           </div>
         </div>
