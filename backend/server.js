@@ -31,7 +31,7 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/lecture-sch
   await User.findOneAndUpdate(
     { email: 'admin@test.com' },
     { name: 'Admin User', password: 'password123', role: 'ADMIN' },
-    { upsert: true, new: true }
+    { upsert: true, returnDocument: 'after' }
   );
   console.log('Secure Admin credentials verified.');
 }).catch(function(err) {
