@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "_id": "69ccfcbe2761a9e4a0c55163",
+      "name": "Admin User",
+      "role": "ADMIN",
+      "__v": 0
+    }
+  ],
+  "courses": [],
+  "lectures": []
+}
