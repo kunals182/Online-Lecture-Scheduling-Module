@@ -1,4 +1,4 @@
-Ideamagix Review Test Assignment: Online Lecture Scheduling Module
+ Online Lecture Scheduling Module
 
 This is my MERN stack submission for the assignment. It's a full-stack web application designed for scheduling lectures, managing courses, and preventing overlapping schedules for instructors.
 
