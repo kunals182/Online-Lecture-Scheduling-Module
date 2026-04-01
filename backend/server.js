@@ -16,17 +16,9 @@ app.use('/api/courses', require('./routes/courseRoutes'));
 app.use('/api/lectures', require('./routes/lectureRoutes'));
 
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/lecture-scheduler')
-.then(async () => {
-    console.log('MongoDB connected');
-    const User = require('./models/User');
-    const adminExists = await User.findOne({ email: 'admin@test.com' });
-    if (!adminExists) {
-        await User.create({ name: 'Admin User', email: 'admin@test.com', password: 'password123', role: 'ADMIN' });
-        console.log('Default admin seeded.');
-    }
-})
+.then(() => console.log('MongoDB connected'))
 .catch(err => console.error('DB connection error:', err));
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

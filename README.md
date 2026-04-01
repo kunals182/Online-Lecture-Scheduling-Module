@@ -53,3 +53,4 @@ GET  /api/lectures/:instructorId    lectures for one instructor
 MongoDB at mongodb://localhost:27017/lecture-scheduler
 Collections: users, courses, lectures
 Database dump is at /backend/database-dump.json
+
