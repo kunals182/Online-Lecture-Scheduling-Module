@@ -11,7 +11,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleLogin = async (e) => {
+  const submitLoginForm = async (e) => {
     e.preventDefault();
     setError('');
     try {
@@ -23,7 +23,7 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
+  const triggerLogout = () => {
     localStorage.removeItem('user');
     setUser(null);
   };
@@ -38,7 +38,6 @@ function App() {
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Animated Background Orbs */}
         <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '40%', height: '40%', background: 'radial-gradient(circle, rgba(138,92,248,0.15) 0%, transparent 70%)', filter: 'blur(60px)', zIndex: 0 }}></div>
         <div style={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '40%', height: '40%', background: 'radial-gradient(circle, rgba(192,132,252,0.1) 0%, transparent 70%)', filter: 'blur(60px)', zIndex: 0 }}></div>
 
@@ -62,7 +61,7 @@ function App() {
             <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>Sign in to access your dashboard</p>
           </div>
 
-          <form onSubmit={handleLogin}>
+          <form onSubmit={submitLoginForm}>
             <div className="form-group">
               <label className="form-label">Email Address</label>
               <div style={{ position: 'relative' }}>
@@ -144,7 +143,7 @@ function App() {
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{user.role} Account</p>
                 </div>
               </div>
-              <button onClick={handleLogout} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
+              <button onClick={triggerLogout} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
                 Sign Out
               </button>
             </div>

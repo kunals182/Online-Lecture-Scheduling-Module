@@ -39,8 +39,8 @@ export default function AdminPanel() {
     fetchData();
   }, []);
 
-  const handleAddCourse = async (e) => {
-    e.preventDefault();
+  const generateCourse = async (ev) => {
+    ev.preventDefault();
     try {
       await api.post('/courses', courseForm);
       setShowCourseModal(false);
@@ -52,7 +52,7 @@ export default function AdminPanel() {
     }
   };
 
-  const handleAddLecture = async (e) => {
+  const assignNewBatch = async (e) => {
     e.preventDefault();
     setErrorMsg('');
     try {
@@ -69,7 +69,7 @@ export default function AdminPanel() {
     }
   };
 
-  const handleAddInstructor = async (e) => {
+  const enrollFaculty = async (e) => {
     e.preventDefault();
     setInstructorError('');
     try {
@@ -208,7 +208,7 @@ export default function AdminPanel() {
         </div>
       </div>
 
-      {/* Create Course Modal */}
+
       {showCourseModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -218,7 +218,7 @@ export default function AdminPanel() {
               </h2>
               <button className="close-btn" onClick={() => setShowCourseModal(false)}>&times;</button>
             </div>
-            <form onSubmit={handleAddCourse}>
+            <form onSubmit={generateCourse}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                 <div className="form-group">
                   <label className="form-label">Course Title</label>
@@ -248,7 +248,7 @@ export default function AdminPanel() {
         </div>
       )}
 
-      {/* Assign Lecture Modal */}
+
       {showLectureModal && (
         <div className="modal-overlay">
           <div className="modal-content" style={{ maxWidth: '450px' }}>
@@ -257,7 +257,7 @@ export default function AdminPanel() {
               <button className="close-btn" onClick={() => setShowLectureModal(false)}>&times;</button>
             </div>
             {errorMsg && <div style={{ background: 'var(--danger)', color: 'white', padding: '0.8rem', borderRadius: '12px', marginBottom: '1.5rem', fontSize: '0.85rem' }}>{errorMsg}</div>}
-            <form onSubmit={handleAddLecture}>
+            <form onSubmit={assignNewBatch}>
               <div className="form-group">
                 <label className="form-label">Instructor</label>
                 <select className="form-control" required value={lectureForm.instructorId} onChange={e => setLectureForm({ ...lectureForm, instructorId: e.target.value })}>
@@ -277,7 +277,7 @@ export default function AdminPanel() {
         </div>
       )}
 
-      {/* Add Instructor Modal */}
+
       {showInstructorModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -286,7 +286,7 @@ export default function AdminPanel() {
               <button className="close-btn" onClick={() => { setShowInstructorModal(false); setInstructorError(''); }}>&times;</button>
             </div>
             {instructorError && <div style={{ background: 'var(--danger)', padding: '0.8rem', borderRadius: '12px', marginBottom: '1.5rem', color: 'white', fontSize: '0.85rem' }}>{instructorError}</div>}
-            <form onSubmit={handleAddInstructor}>
+            <form onSubmit={enrollFaculty}>
               <div className="form-group">
                 <label className="form-label">Full Legal Name</label>
                 <input className="form-control" required placeholder="Enter Name Here" value={instructorForm.name} onChange={e => setInstructorForm({ ...instructorForm, name: e.target.value })} />

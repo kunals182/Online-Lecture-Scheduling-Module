@@ -5,9 +5,10 @@ const User = require('../models/User');
 router.get('/instructors', async (req, res) => {
   try {
     const instructors = await User.find({ role: 'INSTRUCTOR' }).select('-password');
-    res.json(instructors);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.json(instructors);
+  } catch (error) {
+    console.warn("Failed retrieving instructors", error);
+    return res.status(500).json({ message: "Server error occurred" });
   }
 });
 
@@ -25,9 +26,10 @@ router.post('/', async (req, res) => {
     const userObject = newUser.toObject();
     delete userObject.password;
     res.status(201).json(userObject);
-  } catch (err) {
-    if (err.code === 11000) return res.status(400).json({ message: 'Email already exists' });
-    res.status(400).json({ message: err.message });
+  } catch (e) {
+    // Check if email clash
+    if (e.code === 11000) return res.status(400).json({ message: 'Email already exists' });
+    res.status(400).send({ message: e.message });
   }
 });
 

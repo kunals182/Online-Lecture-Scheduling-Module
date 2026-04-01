@@ -1,56 +1,60 @@
-# Lecture Scheduling Module
+# Ideamagix - Review Test Assignment: Online Lecture Scheduling Module
 
-This is my MERN stack test assignment submission. I built an admin panel where
-you can add courses, assign lectures to instructors and make sure no two lectures
-clash on the same day for the same instructor.
+This is a full-stack (MERN) assessment project designed to handle the core requirements of academic scheduling. It provides dedicated interfaces to add instructors, organize courses, and assign lecture batches while actively preventing schedule clashes.
 
-## How to run it locally
+## 🚀 Live Links & Demonstration
 
-You need Node.js and MongoDB installed. Make sure MongoDB is running first.
+*   **Live Project URL**: `[INSERT_YOUR_HOSTING_LINK_HERE]` (e.g., https://your-project.netlify.app/)
+*   **Video Walkthrough**: `[INSERT_GOOGLE_DRIVE_VIDEO_LINK_HERE]`
 
-Backend:
-  cd backend
-  npm install
-  npm start
+## 🔐 Credentials for Evaluation
 
-Frontend (open a new terminal):
-  cd frontend
-  npm install
-  npm run dev
+| Role / Access | Email | Password |
+| :--- | :--- | :--- |
+| **Admin Dashboard** | `admin@test.com` | `password123` |
+| **Instructor Panel** (Test User) | `[INSERT_CREATED_INSTRUCTOR_EMAIL_HERE]` | `[INSERT_CREATED_PASSWORD_HERE]` or `instructor123` |
+| **MongoDB Atlas** | Database URI is available in the provided `.env` file or repository secrets. |
 
-Open browser at http://localhost:5173
+*(Note: The `instructor123` password is automatically assigned to any new instructor created by an Admin if a custom password isn't explicitly entered during onboarding.)*
 
-## How to use the app
+## 📁 Project Architecture & Tech Stack
 
-Note: Authentication was not Mentioned in  requirement Drive file That's why i have not implemented it. Role selection is used for demo purposes.
+This project uses a standard monolithic MERN architecture consisting of:
+*   **Database**: MongoDB (Atlas Cluster). A dump of the database is available at `database-dump.json` in the root backend directory.
+*   **Backend**: Node.js & Express.js (RESTful API architecture).
+*   **Frontend**: React (Vite) utilizing custom CSS for a premium "Cyber-Glass" aesthetic and responsive layouts.
 
-No login screen. When you open the app you'll see two options:
-- Admin button to open the admin dashboard
-- Instructor buttons if any instructors have been added
+## 🔗 Available API Routes
 
-## What admin can do
+### User & Authentication (`/api/users`)
+*   `POST /api/users/login` - Authenticates user (Admin or Instructor) and returns session details.
+*   `GET /api/users/instructors` - Fetches a list of all registered instructors.
+*   `POST /api/users` - Creates a new instructor profile.
 
-- Add instructors by name
-- Add courses with name, level, description and image
-- Assign lecture batches to any course by picking instructor and date
-- If same instructor is already booked on that date, it blocks and shows an error
+### Course Management (`/api/courses`)
+*   `GET /api/courses` - Retrieves the full course catalog.
+*   `POST /api/courses` - Adds a new course to the curriculum.
 
-## Instructor view
+### Lecture Scheduling (`/api/lectures`)
+*   `GET /api/lectures/:instructorId` - Fetches all lectures assigned to a specific instructor.
+*   `GET /api/lectures/all/lectures` - Retrieves the entire schedule across all users.
+*   `POST /api/lectures` - Assigns a lecture. **Includes clash detection** (blocks if the instructor is already booked for that date).
 
-Click an instructor to see all their assigned lectures sorted by date with course name.
+## 💻 Local Development Setup
 
-## API Routes
+If you wish to test the application locally instead of using the provided live URL:
 
-GET  /api/users/instructors         all instructors
-POST /api/users                     add instructor
-GET  /api/courses                   all courses
-POST /api/courses                   add course
-POST /api/lectures                  assign lecture (checks for clash)
-GET  /api/lectures/:instructorId    lectures for one instructor
-
-## Database
-
-MongoDB at mongodb://localhost:27017/lecture-scheduler
-Collections: users, courses, lectures
-Database dump is at /backend/database-dump.json
-
+1.  **Clone the Repository** and navigate to the project directory.
+2.  **Start the Backend**:
+    ```bash
+    cd backend
+    npm install
+    npm start
+    ```
+3.  **Start the Frontend**: Open a second terminal window.
+    ```bash
+    cd frontend
+    npm install
+    npm run dev
+    ```
+4.  Navigate to `http://localhost:5173` in your browser.

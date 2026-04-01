@@ -7,19 +7,19 @@ export default function InstructorPanel({ instructorId, userName }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchLectures = async () => {
+    const getMySchedule = async () => {
       try {
         const res = await api.get(`/lectures/${instructorId}`);
         const sorted = res.data.sort((a, b) => new Date(a.date) - new Date(b.date));
         setLectures(sorted);
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
+        console.warn('Error loading schedule:', e);
       } finally {
         setLoading(false);
       }
     };
     if (instructorId) {
-      fetchLectures();
+      getMySchedule();
     }
   }, [instructorId]);
 
