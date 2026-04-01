@@ -24,7 +24,7 @@ async function dumpDatabase() {
       }
     };
 
-    fs.writeFileSync('database-dump.json', JSON.stringify(dump, null, 2));
+    fs.writeFileSync('../database-dump.json', JSON.stringify(dump, null, 2));
     console.log('Successfully generated database-dump.json');
     process.exit(0);
   } catch (error) {
