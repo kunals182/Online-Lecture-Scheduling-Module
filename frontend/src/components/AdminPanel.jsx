@@ -144,7 +144,6 @@ export default function AdminPanel() {
         </div>
       </div>
 
-      </div>
       {showCourseModal && (
         <div className="modal-overlay">
           <div className="modal-content animate-fade-in">
