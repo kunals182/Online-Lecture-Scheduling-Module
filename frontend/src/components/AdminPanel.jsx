@@ -10,8 +10,6 @@ export default function AdminPanel() {
   const [showCourseModal, setShowCourseModal] = useState(false);
   const [showLectureModal, setShowLectureModal] = useState(false);
   const [showInstructorModal, setShowInstructorModal] = useState(false);
-
-
   const [selectedCourseId, setSelectedCourseId] = useState('');
 
 
@@ -22,6 +20,7 @@ export default function AdminPanel() {
 
   const [errorMsg, setErrorMsg] = useState('');
 
+
   const fetchData = async () => {
     try {
       const [coursesRes, instRes] = await Promise.all([
@@ -30,8 +29,8 @@ export default function AdminPanel() {
       ]);
       setCourses(coursesRes.data);
       setInstructors(instRes.data);
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.log("couldnt get data from server", e);
     }
   };
 
@@ -47,7 +46,7 @@ export default function AdminPanel() {
       setCourseForm({ name: '', level: '', description: '', image: '' });
       fetchData();
     } catch (err) {
-      console.error(err);
+      console.warn("course add failed", err);
       setErrorMsg('Failed to add course');
     }
   };

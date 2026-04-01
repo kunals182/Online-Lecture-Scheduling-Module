@@ -6,41 +6,45 @@ router.get('/:instructorId', async (req, res) => {
   try {
     const lectures = await Lecture.find({ instructorId: req.params.instructorId })
       .populate('courseId', 'name level');
-    res.json(lectures);
+    return res.status(200).json(lectures);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.log("Could not load instructor schedule", err);
+    res.status(500).json({ message: "Internal schedule error" });
   }
 });
 
 router.post('/', async (req, res) => {
   const { courseId, instructorId, date } = req.body;
   try {
-    const existing = await Lecture.findOne({ instructorId, date });
-    if (existing) {
+    const conflict = await Lecture.findOne({ instructorId, date });
+    if (conflict) {
+      console.log("Blocking assignment: Conflict on", date);
       return res.status(400).json({ 
-        message: 'Instructor is already assigned to a lecture on this date.' 
+        message: 'This instructor already has a lecture on ' + date 
       });
     }
 
     const lecture = new Lecture({ courseId, instructorId, date });
     await lecture.save();
     
-    const populatedLecture = await Lecture.findById(lecture._id).populate('courseId', 'name level');
-    res.status(201).json(populatedLecture);
+    const populated = await Lecture.findById(lecture._id).populate('courseId', 'name level');
+    return res.status(201).json(populated);
   } catch (err) {
     if (err.code === 11000) {
-      return res.status(400).json({ message: 'Instructor is already assigned to a lecture on this date.' });
+      return res.status(400).send({ message: 'Conflict: Instructor booked on ' + date });
     }
-    res.status(400).json({ message: err.message });
+    console.error("Assignment error:", err.message);
+    res.status(400).json({ message: "Failed to allocate lecture" });
   }
 });
 
 router.get('/all/lectures', async (req, res) => {
   try {
-    const lectures = await Lecture.find().populate('courseId').populate('instructorId');
-    res.json(lectures);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const allSessions = await Lecture.find().populate('courseId').populate('instructorId');
+    res.status(200).json(allSessions);
+  } catch (e) {
+    console.warn("Global fetch fail", e);
+    res.status(500).send({ error: "Could not fetch all lectures" });
   }
 });
 
